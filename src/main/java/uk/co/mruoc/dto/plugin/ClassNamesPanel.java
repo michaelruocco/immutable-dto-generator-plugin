@@ -1,15 +1,12 @@
 package uk.co.mruoc.dto.plugin;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiClassType;
-import com.intellij.psi.PsiJavaParserFacade;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.PsiType;
-import com.intellij.psi.impl.PsiJavaParserFacadeImpl;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
 import javax.swing.*;
+import javax.swing.event.DocumentListener;
+import java.awt.event.ItemListener;
 import java.nio.file.Path;
 
 public class ClassNamesPanel extends JPanel {
@@ -20,7 +17,7 @@ public class ClassNamesPanel extends JPanel {
     private JTextField packageNameField = new PackageNameField();
     private JTextField classNameField = new ClassNameField();
 
-    public ClassNamesPanel(Project project) {
+    ClassNamesPanel(Project project) {
         sourceComboBox = new SourceRootComboBox(project);
         testComboBox = new TestSourceRootComboBox(project);
 
@@ -39,6 +36,26 @@ public class ClassNamesPanel extends JPanel {
         add(builder.getPanel());
     }
 
+    public void addItemListener(ItemListener listener) {
+        sourceComboBox.addItemListener(listener);
+        testComboBox.addItemListener(listener);
+    }
+
+    public void addDocumentListener(DocumentListener listener) {
+        packageNameField.getDocument().addDocumentListener(listener);
+        classNameField.getDocument().addDocumentListener(listener);
+    }
+
+    public boolean isCompleted() {
+        if (!sourceComboBox.hasSelectedSource()) {
+            return false;
+        }
+        if (!testComboBox.hasSelectedSource()) {
+            return false;
+        }
+        return !getClassName().isEmpty();
+    }
+
     public Path getSourcePath() {
         return sourceComboBox.getSelectedSourcePath();
     }
@@ -48,11 +65,11 @@ public class ClassNamesPanel extends JPanel {
     }
 
     public String getPackageName() {
-        return packageNameField.getText();
+        return packageNameField.getText().trim();
     }
 
     public String getClassName() {
-        return classNameField.getText();
+        return classNameField.getText().trim();
     }
 
 }

@@ -2,6 +2,8 @@ package uk.co.mruoc.dto.plugin;
 
 import com.intellij.openapi.project.Project;
 
+import javax.swing.ComboBoxModel;
+
 class TestSourceRootComboBox extends SourceRootComboBox {
 
     TestSourceRootComboBox(Project project) {
@@ -10,14 +12,17 @@ class TestSourceRootComboBox extends SourceRootComboBox {
     }
 
     private int getTestItemIndex() {
-        SourceRootComboBoxItem[] items = super.getItems();
-        for (int i = 0; i < items.length; i++) {
-            SourceRootComboBoxItem item = items[i];
+        ComboBoxModel<SourceRootComboBoxItem> model = getModel();
+        for (int i = 0; i < model.getSize(); i++) {
+            SourceRootComboBoxItem item = model.getElementAt(i);
             if (item.isTestSourceItem()) {
                 return i;
             }
         }
-        return 0;
+        if (model.getSize() > 0) {
+            return 0;
+        }
+        return -1;
     }
 
 }

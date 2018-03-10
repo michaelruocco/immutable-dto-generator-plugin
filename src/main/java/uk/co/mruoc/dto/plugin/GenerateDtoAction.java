@@ -24,11 +24,11 @@ public class GenerateDtoAction extends AnAction {
     private void generateClasses(GenerateDialog dialog) {
         Path productionPath = dialog.getSourcePath();
         Path testPath = dialog.getTestSourcePath();
-        GenerationParams params = dialog.getGenerationParams();
-        FilesGenerator generator = new FilesGenerator(productionPath, testPath, params);
+        FilesGenerator generator = new FilesGenerator(productionPath, testPath);
 
         FileDocumentManager.getInstance().saveAllDocuments();
-        generator.generate();
+        GenerationParams params = dialog.getGenerationParams();
+        generator.generate(params);
         VirtualFileManager.getInstance().refreshWithoutFileWatcher(false);
     }
 

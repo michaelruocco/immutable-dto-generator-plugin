@@ -4,6 +4,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.ui.AddEditRemovePanel;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.event.TableModelListener;
+
 public class FieldTablePanel extends AddEditRemovePanel<GenerateDtoTableRow> {
 
     private final Project project;
@@ -15,6 +17,14 @@ public class FieldTablePanel extends AddEditRemovePanel<GenerateDtoTableRow> {
     private FieldTablePanel(Project project, GenerateDtoTableModel tableModel) {
         super(tableModel, tableModel.getData(), "Fields");
         this.project = project;
+    }
+
+    public void addTableModelListener(TableModelListener listener) {
+        getTable().getModel().addTableModelListener(listener);
+    }
+
+    public boolean hasAtLeastOneField() {
+        return getData().size() > 0;
     }
 
     @Nullable
@@ -39,16 +49,8 @@ public class FieldTablePanel extends AddEditRemovePanel<GenerateDtoTableRow> {
 
     private GenerateDtoTableRow show(AddFieldDialog dialog) {
         boolean ok = dialog.showAndGet();
-        if(ok) {
-            //try {
-                return dialog.getField();
-            /*} catch (InvalidTypeException e) {
-                DialogBuilder errorBuilder = new DialogBuilder(project);
-                errorBuilder.setTitle("Invalid Type");
-                errorBuilder.setErrorText("Cannot convert " + e.getMessage() + " to primitive type or class");
-                errorBuilder.show();
-                ok = dialog.showAndGet();
-            }*/
+        if (ok) {
+            return dialog.getField();
         }
         return null;
     }

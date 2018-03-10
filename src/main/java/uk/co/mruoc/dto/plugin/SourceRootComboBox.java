@@ -16,19 +16,16 @@ import java.util.Objects;
 
 public class SourceRootComboBox extends ComboBox<SourceRootComboBoxItem> {
 
-    private final SourceRootComboBoxItem[] items;
-
     SourceRootComboBox(Project project) {
         this(toSourceRootComboBoxItems(project));
     }
 
     private SourceRootComboBox(SourceRootComboBoxItem[] items) {
         super(items);
-        this.items = items;
     }
 
-    SourceRootComboBoxItem[] getItems() {
-        return items;
+    public boolean hasSelectedSource() {
+        return getSelectedIndex() != -1;
     }
 
     public Path getSelectedSourcePath() {
