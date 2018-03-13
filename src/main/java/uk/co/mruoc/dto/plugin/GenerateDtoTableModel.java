@@ -21,7 +21,7 @@ public class GenerateDtoTableModel extends AddEditRemovePanel.TableModel<Generat
         switch (columnIndex) {
             case 0: return row.getFieldName();
             case 1: return row.getFieldType();
-            default: throw new IllegalArgumentException("column index " + columnIndex);
+            default: throw new IllegalArgumentException("invalid column index " + columnIndex);
         }
     }
 
