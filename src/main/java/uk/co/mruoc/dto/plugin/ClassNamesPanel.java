@@ -11,15 +11,27 @@ import java.nio.file.Path;
 
 public class ClassNamesPanel extends JPanel {
 
-    private SourceRootComboBox sourceComboBox;
-    private SourceRootComboBox testComboBox;
+    private final AbstractSourceRootComboBox sourceComboBox;
+    private final AbstractSourceRootComboBox testComboBox;
 
-    private JTextField packageNameField = new PackageNameField();
-    private JTextField classNameField = new ClassNameField();
+    private final JTextField packageNameField;
+    private final JTextField classNameField;
 
     ClassNamesPanel(Project project) {
-        sourceComboBox = new SourceRootComboBox(project);
-        testComboBox = new TestSourceRootComboBox(project);
+        this(new PackageNameField(),
+                new ClassNameField(),
+                new SourceRootComboBox(project),
+                new TestSourceRootComboBox(project));
+    }
+
+    ClassNamesPanel(JTextField packageNameField,
+                    JTextField classNameField,
+                    AbstractSourceRootComboBox sourceComboBox,
+                    AbstractSourceRootComboBox testComboBox) {
+        this.packageNameField = packageNameField;
+        this.classNameField = classNameField;
+        this.sourceComboBox = sourceComboBox;
+        this.testComboBox = testComboBox;
 
         DefaultFormBuilder builder = new DefaultFormBuilder(new FormLayout(""));
         builder.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -53,6 +65,7 @@ public class ClassNamesPanel extends JPanel {
         if (!testComboBox.hasSelectedSource()) {
             return false;
         }
+        System.out.println("className " + getClassName());
         return !getClassName().isEmpty();
     }
 

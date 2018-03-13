@@ -11,12 +11,6 @@ public class GenerateDtoTableModel extends AddEditRemovePanel.TableModel<Generat
     private final List<String> columnNames = Arrays.asList("Field Name", "Type");
     private final List<GenerateDtoField> rows = new ArrayList<>();
 
-    GenerateDtoTableModel() {
-        //add(new GenerateDtoField("firstName", String.class));
-        //add(new GenerateDtoField("lastName", String.class));
-        //add(new GenerateDtoField("balance", BigDecimal.class));
-    }
-
     @Override
     public String getColumnName(int columnIndex) {
         return columnNames.get(columnIndex);

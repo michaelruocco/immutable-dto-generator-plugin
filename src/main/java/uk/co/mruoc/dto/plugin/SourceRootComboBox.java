@@ -4,7 +4,6 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
-import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.vfs.VirtualFile;
 
 import java.nio.file.Path;
@@ -14,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class SourceRootComboBox extends ComboBox<SourceRootComboBoxItem> {
+public class SourceRootComboBox extends AbstractSourceRootComboBox {
 
     SourceRootComboBox(Project project) {
         this(toSourceRootComboBoxItems(project));
@@ -24,10 +23,12 @@ public class SourceRootComboBox extends ComboBox<SourceRootComboBoxItem> {
         super(items);
     }
 
+    @Override
     public boolean hasSelectedSource() {
         return getSelectedIndex() != -1;
     }
 
+    @Override
     public Path getSelectedSourcePath() {
         SourceRootComboBoxItem item = (SourceRootComboBoxItem) getSelectedItem();
         VirtualFile file = Objects.requireNonNull(item).getVirtualFile();
