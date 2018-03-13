@@ -9,10 +9,17 @@ import java.awt.*;
 
 public class AddFieldPanel extends JPanel {
 
-    private final JTextField nameField = new FieldNameField();
-    private final TypeField typeField = new TypeField();
+    private final JTextField nameField;
+    private final TypeField typeField;
 
     AddFieldPanel() {
+        this(new FieldNameField(), new TypeField());
+    }
+
+    AddFieldPanel(JTextField nameField, TypeField typeField) {
+        this.nameField = nameField;
+        this.typeField = typeField;
+
         DefaultFormBuilder builder = new DefaultFormBuilder(new FormLayout(""));
         builder.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         builder.appendColumn("right:pref");
@@ -26,24 +33,33 @@ public class AddFieldPanel extends JPanel {
         add(builder.getPanel(), BorderLayout.CENTER);
     }
 
-    public void setName(String name) {
-        this.nameField.setText(name);
+    public void setField(GenerateDtoField field) {
+        setFieldName(field.getFieldName());
+        setFieldType(field.getFieldType());
     }
 
-    public void setType(Class<?> type) {
-        this.typeField.setType(type);
-    }
-
-    public String getName() {
-        return nameField.getText();
-    }
-
-    public Class<?> getType() {
-        return typeField.getType();
+    public GenerateDtoField getField() {
+        return new GenerateDtoField(getFieldName(), getFieldType());
     }
 
     public ValidationInfo doValidate() {
         return typeField.doValidate();
+    }
+
+    private String getFieldName() {
+        return nameField.getText();
+    }
+
+    private void setFieldName(String name) {
+        this.nameField.setText(name);
+    }
+
+    private Class<?> getFieldType() {
+        return typeField.getType();
+    }
+
+    private void setFieldType(Class<?> type) {
+        this.typeField.setType(type);
     }
 
 }

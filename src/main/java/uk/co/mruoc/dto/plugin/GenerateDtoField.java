@@ -1,11 +1,11 @@
 package uk.co.mruoc.dto.plugin;
 
-public class GenerateDtoTableRow {
+public class GenerateDtoField {
 
     private final String fieldName;
     private final Class<?> type;
 
-    GenerateDtoTableRow(String fieldName, Class<?> type) {
+    GenerateDtoField(String fieldName, Class<?> type) {
         this.fieldName = fieldName;
         this.type = type;
     }
@@ -14,7 +14,7 @@ public class GenerateDtoTableRow {
         return fieldName;
     }
 
-    public Class<?> getType() {
+    public Class<?> getFieldType() {
         return type;
     }
 

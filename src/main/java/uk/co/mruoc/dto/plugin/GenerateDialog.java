@@ -49,8 +49,8 @@ public class GenerateDialog extends DialogWrapper implements DocumentListener, I
         DefaultGenerationParams params = new DefaultGenerationParams();
         params.setPackageName(classNamesPanel.getPackageName());
         params.setDtoClassName(classNamesPanel.getClassName());
-        for (GenerateDtoTableRow row : fieldsPanel.getData()) {
-            params.addFieldDefinition(row.getFieldName(), row.getType());
+        for (GenerateDtoField row : fieldsPanel.getData()) {
+            params.addFieldDefinition(row.getFieldName(), row.getFieldType());
         }
         return params;
     }

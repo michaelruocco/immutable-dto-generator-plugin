@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.event.TableModelListener;
 
-public class FieldTablePanel extends AddEditRemovePanel<GenerateDtoTableRow> {
+public class FieldTablePanel extends AddEditRemovePanel<GenerateDtoField> {
 
     private final Project project;
 
@@ -29,25 +29,25 @@ public class FieldTablePanel extends AddEditRemovePanel<GenerateDtoTableRow> {
 
     @Nullable
     @Override
-    protected GenerateDtoTableRow addItem() {
+    protected GenerateDtoField addItem() {
         AddFieldDialog dialog = new AddFieldDialog(project);
         return show(dialog);
     }
 
     @Override
-    protected boolean removeItem(GenerateDtoTableRow row) {
+    protected boolean removeItem(GenerateDtoField row) {
         return true;
     }
 
     @Nullable
     @Override
-    protected GenerateDtoTableRow editItem(GenerateDtoTableRow row) {
+    protected GenerateDtoField editItem(GenerateDtoField row) {
         AddFieldDialog dialog = new AddFieldDialog(project);
         dialog.setField(row);
         return show(dialog);
     }
 
-    private GenerateDtoTableRow show(AddFieldDialog dialog) {
+    private GenerateDtoField show(AddFieldDialog dialog) {
         boolean ok = dialog.showAndGet();
         if (ok) {
             return dialog.getField();

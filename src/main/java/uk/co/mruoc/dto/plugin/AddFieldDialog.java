@@ -18,13 +18,12 @@ public class AddFieldDialog extends DialogWrapper {
         init();
     }
 
-    public void setField(GenerateDtoTableRow field) {
-        addFieldPanel.setName(field.getFieldName());
-        addFieldPanel.setType(field.getType());
+    public void setField(GenerateDtoField field) {
+        addFieldPanel.setField(field);
     }
 
-    public GenerateDtoTableRow getField() {
-        return new GenerateDtoTableRow(addFieldPanel.getName(), addFieldPanel.getType());
+    public GenerateDtoField getField() {
+        return addFieldPanel.getField();
     }
 
     @Override
