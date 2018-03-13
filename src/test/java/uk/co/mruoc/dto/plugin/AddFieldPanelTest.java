@@ -24,13 +24,13 @@ public class AddFieldPanelTest {
 
         GenerateDtoField field = panel.getField();
 
-        assertThat(field.getFieldType()).isEqualTo(String.class);
+        assertThat(field.getFieldType()).isEqualTo("java.lang.String");
     }
 
     @Test
     public void shouldSetFieldNameAndType() {
         AddFieldPanel panel = new AddFieldPanel();
-        GenerateDtoField expectedField = new GenerateDtoField("changedField", Object.class);
+        GenerateDtoField expectedField = new GenerateDtoField("changedField", "Object");
 
         panel.setField(expectedField);
 

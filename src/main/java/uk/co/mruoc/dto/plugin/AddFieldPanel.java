@@ -3,6 +3,7 @@ package uk.co.mruoc.dto.plugin;
 import com.intellij.openapi.ui.ValidationInfo;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
+import com.squareup.javapoet.TypeName;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,11 +55,11 @@ public class AddFieldPanel extends JPanel {
         this.nameField.setText(name);
     }
 
-    private Class<?> getFieldType() {
+    private String getFieldType() {
         return typeField.getType();
     }
 
-    private void setFieldType(Class<?> type) {
+    private void setFieldType(String type) {
         this.typeField.setType(type);
     }
 

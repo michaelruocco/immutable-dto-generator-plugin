@@ -4,7 +4,7 @@ import javax.swing.JTextField;
 
 class PackageNameField extends JTextField {
 
-    private static final String DEFAULT_PACKAGE_NAME = "uk.co.default";
+    private static final String DEFAULT_PACKAGE_NAME = "uk.co.temp";
 
     PackageNameField() {
         setText(DEFAULT_PACKAGE_NAME);

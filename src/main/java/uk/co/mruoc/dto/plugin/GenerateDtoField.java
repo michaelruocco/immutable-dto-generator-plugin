@@ -3,9 +3,9 @@ package uk.co.mruoc.dto.plugin;
 public class GenerateDtoField {
 
     private final String fieldName;
-    private final Class<?> type;
+    private final String type;
 
-    GenerateDtoField(String fieldName, Class<?> type) {
+    GenerateDtoField(String fieldName, String type) {
         this.fieldName = fieldName;
         this.type = type;
     }
@@ -14,7 +14,7 @@ public class GenerateDtoField {
         return fieldName;
     }
 
-    public Class<?> getFieldType() {
+    public String getFieldType() {
         return type;
     }
 
