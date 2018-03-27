@@ -3,7 +3,6 @@ package uk.co.mruoc.dto.plugin;
 import com.intellij.openapi.ui.ValidationInfo;
 import com.jgoodies.forms.builder.DefaultFormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
-import com.squareup.javapoet.TypeName;
 
 import javax.swing.*;
 import java.awt.*;

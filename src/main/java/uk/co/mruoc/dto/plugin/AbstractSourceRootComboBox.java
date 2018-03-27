@@ -10,8 +10,8 @@ public abstract class AbstractSourceRootComboBox extends ComboBox<SourceRootComb
         super(items);
     }
 
-    abstract boolean hasSelectedSource();
+    protected abstract boolean hasSelectedSource();
 
-    abstract Path getSelectedSourcePath();
+    protected abstract Path getSelectedSourcePath();
 
 }

@@ -18,7 +18,7 @@ public class GenerateDtoTableModelTest {
 
     @Test
     public void shouldDefaultDataToEmpty() {
-        assertThat(model.getData()).isEmpty();;
+        assertThat(model.getData()).isEmpty();
     }
 
     @Test
