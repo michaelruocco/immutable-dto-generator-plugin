@@ -2,6 +2,7 @@ package uk.co.mruoc.dto.plugin;
 
 import org.junit.Test;
 
+import javax.swing.JCheckBox;
 import javax.swing.event.DocumentListener;
 import java.awt.event.ItemListener;
 
@@ -13,11 +14,13 @@ public class ClassNamesPanelTest {
     private final FakeTextField classNameField = new FakeTextField();
     private final FakeSourceRouteComboBox sourceComboBox = new FakeSourceRouteComboBox();
     private final FakeSourceRouteComboBox testComboBox = new FakeSourceRouteComboBox();
+    private final JCheckBox checkBox = new JCheckBox();
 
     private final ClassNamesPanel panel = new ClassNamesPanel(packageNameField,
             classNameField,
             sourceComboBox,
-            testComboBox);
+            testComboBox,
+            checkBox);
 
     @Test
     public void shouldAddItemListenerToComboBoxes() {
@@ -81,6 +84,18 @@ public class ClassNamesPanelTest {
         classNameField.setDocument(document);
 
         assertThat(panel.getPackageName()).isEmpty();
+    }
+
+    @Test
+    public void shouldReturnIsApiClassFalseIfCheckBoxNotSet() {
+        assertThat(panel.isApiClass()).isFalse();
+    }
+
+    @Test
+    public void shouldReturnIsApiClassTrueIfCheckBoxSet() {
+        checkBox.setSelected(true);
+
+        assertThat(panel.isApiClass()).isTrue();
     }
 
 }

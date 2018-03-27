@@ -17,21 +17,26 @@ public class ClassNamesPanel extends JPanel {
     private final JTextField packageNameField;
     private final JTextField classNameField;
 
+    private final JCheckBox isApiClassCheckBox;
+
     ClassNamesPanel(Project project) {
         this(new PackageNameField(),
                 new ClassNameField(),
                 new SourceRootComboBox(project),
-                new TestSourceRootComboBox(project));
+                new TestSourceRootComboBox(project),
+                new JCheckBox());
     }
 
     ClassNamesPanel(JTextField packageNameField,
                     JTextField classNameField,
                     AbstractSourceRootComboBox sourceComboBox,
-                    AbstractSourceRootComboBox testComboBox) {
+                    AbstractSourceRootComboBox testComboBox,
+                    JCheckBox isApiClassCheckBox) {
         this.packageNameField = packageNameField;
         this.classNameField = classNameField;
         this.sourceComboBox = sourceComboBox;
         this.testComboBox = testComboBox;
+        this.isApiClassCheckBox = isApiClassCheckBox;
 
         DefaultFormBuilder builder = new DefaultFormBuilder(new FormLayout(""));
         builder.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -44,6 +49,7 @@ public class ClassNamesPanel extends JPanel {
         builder.append("Test Source", testComboBox);
         builder.append("Package Name", packageNameField);
         builder.append("Class Name", classNameField);
+        builder.append("API Class", isApiClassCheckBox);
 
         add(builder.getPanel());
     }
@@ -65,7 +71,6 @@ public class ClassNamesPanel extends JPanel {
         if (!testComboBox.hasSelectedSource()) {
             return false;
         }
-        System.out.println("className " + getClassName());
         return !getClassName().isEmpty();
     }
 
@@ -83,6 +88,10 @@ public class ClassNamesPanel extends JPanel {
 
     public String getClassName() {
         return classNameField.getText().trim();
+    }
+
+    public boolean isApiClass() {
+        return isApiClassCheckBox.isSelected();
     }
 
 }
